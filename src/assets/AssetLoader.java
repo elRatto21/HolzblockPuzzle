@@ -232,7 +232,7 @@ public class AssetLoader {
 				}
 				zf.setzeBild(blockData[2], block, bc.getX(blockData[0], blockData[1]), bc.getY(blockData[0], blockData[1]), 50, 50);
 				statusCords.add(bc.getX(blockData[0], blockData[1]) + " " + bc.getY(blockData[0], blockData[1]));
-				bc.setStatus(cP);
+				bc.setStatusTrue(cP);
 				zf.repaint();
 			}
 			switch(bc.getPart()) {
@@ -250,10 +250,16 @@ public class AssetLoader {
 					break;
 			}
 			bc.setPart(-1);
-			zf.repaint();
 			if(Parts[0].equals("null") && Parts[1].equals("null") && Parts[2].equals("null")) {
 				generateParts(Parts);
 			}
+			ArrayList<String> solvedBlocks = bc.checkSolve();
+			for(int i = 0; i < solvedBlocks.size(); i++) {
+				zf.loeschen(Integer.parseInt(solvedBlocks.get(i)));
+				zf.repaint();
+			}
+			bc.setStatusFalse(solvedBlocks);
+			zf.repaint();
 		}
 	}
 }
