@@ -43,6 +43,9 @@ public class AssetLoader {
 		zf.setzeText(100, "Points", 430, 57, 30, Color.WHITE);
 	}
 	
+	/**
+	 * Lädt den Spielhintergrund mit den Buttons
+	 */
 	public void loadGameScreen() throws IOException {
 		bild = ImageIO.read(AssetLoader.class.getResource("Gamescreen.png"));
 		zf.setzeBild(0, bild, 0, 0, 600, 800);
@@ -106,7 +109,10 @@ public class AssetLoader {
 		
 		zf.repaint();
 	}
-	
+
+	/**
+	 * Generiert die Buttons der Spielfläche
+	 */
 	public void generateButtons() {
 		int x = 0;
 		int y = 0;
@@ -141,6 +147,11 @@ public class AssetLoader {
 		}
 	}
 
+	/**
+	 * Generiert die 3 benutzbaren Teilearten
+	 * @param Parts Das Array, in welchem die Teilearten gespeichert werden
+	 * @return Array mit den generierten Teilearten
+	 */
 	public String[] generateParts(String Parts[]) throws IOException {
 		Random rnd = new Random();
 		for(int i = 0; i < 3; i++) {
@@ -214,10 +225,6 @@ public class AssetLoader {
 	private void exit_ActionPerformed(ActionEvent evt) throws IOException {
 	}
 	
-	private void increaseScore(int inc) {
-		score = score + inc;
-	}
-	
 	private void button_ActionPerformed(ActionEvent evt) throws IOException {
 		String in = evt.toString();
 		String out = in.substring(111, 118); //Filtert die x und y Koordinate aus Buttonevent
@@ -225,9 +232,20 @@ public class AssetLoader {
 		String cords = temp[0] + " " + temp[1];
 		//System.out.println(cords);
 		generateBlocks(bc.calcBlocks(cords, Parts));
-		
 	}
 	
+	/**
+	 * Erhöht die Score Variable um eine bestimmte Menge
+	 * @param inc Die Menge, um die erhöht wird
+	 */
+	private void increaseScore(int inc) {
+		score = score + inc;
+	}
+	
+	/**
+	 * Generiert die platzierten Blöcke
+	 * @param cP ArrayList mit den Koordinaten der Blöcke, die platziert werden sollen
+	 */
 	private void generateBlocks(ArrayList<String> cP) throws IOException {
 		if(bc.checkStatus(cP) == false) {
 			increaseScore(10);

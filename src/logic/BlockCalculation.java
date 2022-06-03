@@ -18,6 +18,9 @@ public class BlockCalculation {
 		setupIDs();
 	}
 	
+	/**
+	 * Generiert ein zweidimensionales Array mit den Koordinaten aller Felder
+	 */
 	private void setupCords() {
 		int i = 107;
 		for(int a = 0; a < 9; a++) {
@@ -30,6 +33,9 @@ public class BlockCalculation {
 		}
 	}
 	
+	/**
+	 * Generiert ein zweidimensionales Array mit dem Status der Felder (belegt oder unbelegt)
+	 */
 	private void setupStatus() {
 		for(int a = 0; a < 9; a++) {
 			for(int b = 0; b < 9; b++) {
@@ -38,6 +44,9 @@ public class BlockCalculation {
 		}
 	}
 	
+	/**
+	 * Generiert ein zweidimensionales Array mit den IDs aller Felder
+	 */
 	private void setupIDs() {
 		for(int a = 0; a < 9; a++) {
 			for(int b = 0; b < 9; b++) {
@@ -186,6 +195,10 @@ public class BlockCalculation {
 		return cP;
 	}
 	
+	/**
+	 * Setzt den Status der Blöcke aus einer ArrayList auf true
+	 * @param blocks Die Blöcke
+	 */
 	public void setStatusTrue(ArrayList<String> blocks) {
 		for(int i = 0; i < blocks.size(); i++) {
 			String tempArr[] = blocks.get(i).split(" ");
@@ -197,7 +210,7 @@ public class BlockCalculation {
 	
 	/**
 	 * Setzt den Status der Blöcke aus einer ArrayList auf false
-	 * @param blocks Die Blöcke, die auf false gesetzt werden sollen (IDs der Blöcke als String)
+	 * @param blocks Die Blöcke
 	 */
 	public void setStatusFalse(ArrayList<String> blocks) {
 		for(int i = 0; i < blocks.size(); i++) {
@@ -228,6 +241,10 @@ public class BlockCalculation {
 		return false;
 	}
 	
+	/**
+	 * Prüft, ob eine 3x3, 1x9 oder 9x1 Kombination gelöst wurde
+	 * @return ArrayList mit den Feldern, die in der gelösten Kombination vorkommen
+	 */
 	public ArrayList<String> checkSolve() {
 		ArrayList<String> blocks = new ArrayList<String>();
 		

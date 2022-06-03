@@ -23,6 +23,9 @@ public class GameScreen {
 		Parts = al.generateParts(Parts);
 	}
 	
+	/**
+	 * @return Die Art der Teile
+	 */
 	public String[] getParts() {
 		return Parts;
 	}
