@@ -105,12 +105,12 @@ public class BlockCalculation {
 		int selectedB = -1;
 		for(int b = 0; b < 9; b++) {
 			for(int a = 0; a < 9; a++) {
-				System.out.println("Arr: " + blockCords[a][b] + " Cords: " + cords);
+				//System.out.println("Arr: " + blockCords[a][b] + " Cords: " + cords);
 				if(blockCords[a][b].equals(cords)) {
 					selectedA = a;
 					selectedB = b;
 					cP.add(selectedA + " " + selectedB + " " + checkID(selectedA, selectedB));
-					System.out.println("A (Y): " + selectedA + " | B (X): " + selectedB);
+					//System.out.println("A (Y): " + selectedA + " | B (X): " + selectedB);
 					break;
 				}
 			}

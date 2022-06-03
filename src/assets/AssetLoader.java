@@ -29,7 +29,8 @@ public class AssetLoader {
 	private JButton exit = new JButton();
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
 	
-	private ArrayList<String> calculatedParts = new ArrayList<String>();
+	private int score = 0;
+	
 	private String[] Parts = new String[3];
 	
 	
@@ -38,6 +39,8 @@ public class AssetLoader {
 		this.ic = ic;
 		this.bc = bc;
 		block = ImageIO.read(AssetLoader.class.getResource("block.png"));
+		zf.setzeText(99, String.valueOf(score), 330, 57, 30, Color.WHITE);
+		zf.setzeText(100, "Points", 430, 57, 30, Color.WHITE);
 	}
 	
 	public void loadGameScreen() throws IOException {
@@ -142,7 +145,7 @@ public class AssetLoader {
 		Random rnd = new Random();
 		for(int i = 0; i < 3; i++) {
 			int temp = rnd.nextInt(27);
-			System.out.println(temp);
+			//System.out.println(temp);
 			if(temp < 3) {
 				bild = ImageIO.read(AssetLoader.class.getResource("dickesDach.png"));
 				Parts[i] = "dickesDach";
@@ -194,21 +197,25 @@ public class AssetLoader {
 	}
 	
 	private void part1_ActionPerformed(ActionEvent evt) {
-		System.out.println("Part 1 clicked");
+		//System.out.println("Part 1 clicked");
 		bc.setPart(1);
 	}
 	
 	private void part2_ActionPerformed(ActionEvent evt) {
-		System.out.println("Part 2 clicked");
+		//System.out.println("Part 2 clicked");
 		bc.setPart(2);
 	}
 	
 	private void part3_ActionPerformed(ActionEvent evt) {
-		System.out.println("Part 3 clicked");
+		//System.out.println("Part 3 clicked");
 		bc.setPart(3);
 	}
 	
 	private void exit_ActionPerformed(ActionEvent evt) throws IOException {
+	}
+	
+	private void increaseScore(int inc) {
+		score = score + inc;
 	}
 	
 	private void button_ActionPerformed(ActionEvent evt) throws IOException {
@@ -216,12 +223,16 @@ public class AssetLoader {
 		String out = in.substring(111, 118); //Filtert die x und y Koordinate aus Buttonevent
 		String[] temp = out.split(",");
 		String cords = temp[0] + " " + temp[1];
-		System.out.println(cords);
+		//System.out.println(cords);
 		generateBlocks(bc.calcBlocks(cords, Parts));
+		
 	}
 	
 	private void generateBlocks(ArrayList<String> cP) throws IOException {
 		if(bc.checkStatus(cP) == false) {
+			increaseScore(10);
+			zf.loeschen(99);
+			zf.setzeText(99, String.valueOf(score), 330, 57, 30, Color.WHITE);
 			ArrayList<String> statusCords = new ArrayList<String>();
 			String tempArr[] = new String[3];
 			int blockData[] = new int[3];
@@ -257,6 +268,22 @@ public class AssetLoader {
 			for(int i = 0; i < solvedBlocks.size(); i++) {
 				zf.loeschen(Integer.parseInt(solvedBlocks.get(i)));
 				zf.repaint();
+			}
+			switch(solvedBlocks.size()) {
+				case 9:
+					increaseScore(50);
+					zf.loeschen(99);
+					zf.setzeText(99, String.valueOf(score), 330, 57, 30, Color.WHITE);
+					break;
+				case 18:
+					increaseScore(150);
+					zf.loeschen(99);
+					zf.setzeText(99, String.valueOf(score), 330, 57, 30, Color.WHITE);
+					break;
+				case 27:
+					increaseScore(300);
+					zf.loeschen(99);
+					zf.setzeText(99, String.valueOf(score), 330, 57, 30, Color.WHITE);
 			}
 			bc.setStatusFalse(solvedBlocks);
 			zf.repaint();
